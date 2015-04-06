@@ -190,7 +190,7 @@ As horizontal resolution in general circulation models (GCMs) increases, the rep
 
 The Community Atmosphere Model (CAM) 
 
-In this paper, all simulations utilize the Spectral Element (SE) dynamical core option within CAM.
+In this paper, all simulations utilize the Spectral Element (SE) dynamical core option within CAM. SE is the newest dynamical core available in CAM and is based upon continuous Galerkin spectral finite elements which are applied on a cubed-sphere grid \citep{Taylor1997,Thomas2005,Taylor2010,Dennis2012}. CAM-SE has been shown to locally conserve both mass and tracer mass to machine precision, as well as moist total energy to the level of time truncation error in the absence of dissipative processes \citep{Taylor2011}. Additionally, since atmospheric primitive equations are solved locally on individual elements, interprocessor communication relative to more traditional atmospheric numerical schemes, giving CAM-SE attractive scaling properties \citep{Dennis2012,Evans2013}.
 
 \subsection{Coupling within CESM}
 
@@ -198,19 +198,23 @@ In this paper, all simulations utilize the Spectral Element (SE) dynamical core 
 
 Prescribed SSTs and ice are passed to the model on a 1\degree{}x1\degree{} grid and internally interpolated to the ocean and ice grids.
 
+During coupling between the atmosphere and ocean, state variables from the atmospheric grid are conservatively remapped to the ocean grid. Surface momentum stress ($\tau$) and sensible and latent heat fluxes are calculated on the ocean grid. The quantities are then passed back to the atmospheric grid, allowing these quantities to be available to both the atmospheric dynamical core and subgrid physical parameterizations.
+
+Generally, if the atmosphere and ocean are not on the same grid, the atmospheric grid consists of finer grid spacing. 
+
 \section{Results}
 
 \subsection{Deterministic simulations}
 
-To assess the differences in simulated TCs in a controlled manner, we utilize two nearly identical CAM setups to forecast observed storms. These simulations utilize the new, variable-resolution capability of CAM-SE \citep{Zarzycki2014APE}.
+To assess the differences in simulated TCs in a controlled, deterministic manner, we utilize two nearly identical CAM setups to complete short-term forecast simulations of observed storms. These simulations utilize the new, variable-resolution capability of CAM-SE \citep{Zarzycki2014APE}.
 
-grid with 1/8\degree{} (\texttilde{}14km) grid spacing over the Atlantic Ocean and are initialized with atmospheric analysis from the.
+The model is configured with an atmospheric grid with 1/8\degree{} (\texttilde{}14km) resolution over the Atlantic Ocean and are initialized with a digitally-filtered atmospheric analysis from the National Center for Atmospheric Predictions's Global Data Assimilation System (GDAS). Observed SSTs are taken from NOAAOI and provided as input to the model on a 1\degree{}x1\degree{} grid. The land surface is modeled by the Community Land Model (CLM) version 4.0 and is initialized with a state nudged to be in balance with the atmospheric initial conditions. The model setup and initialization are further detailed in \citet{Zarzycki2015TCForecast}.
 
-Observed SSTs are taken from NOAAOI and provided as input to the model on a 1\degree{}x1\degree{} grid.
+The only differences between the two model forecasts is the grid used by the data ocean and ice models. The first set of simulations uses a displaced tripole grid with an equivalent resolution of 1\degree{} (gx1v6) while the second uses an ocean grid identical to the atmospheric grid with an equivalent resolution of 1/8\degree{}. Since the base SST forcing is also on a 1\degree{} grid, any differences in the model result arise due to the calculating of surface fluxes and momentum drag, which are calculated on the corresponding ocean grids.
 
-Further details about model setup and initialization are described in \citet{Zarzycki2015TCForecast}.
+Figure XXXX shows the 120-hour forecast for Hurricane Leslie. The simulation was initialized at 00Z on August 31st, 2012 and is valid at 00Z on September 5th, 2012. The forecast using the 1\degree{} ocean grid is on the top, with the 1/8\degree{} ocean grid on the bottom. All fields are extracted from the atmospheric model component. The left most panels depict instantaneous lowest model level wind (black vectors) as well as the surface frictional stress vector (red). In the top panel, we note many instances where the vectors are not aligned. This is due to the fact that the surface stress is calculated on the coarser grid. The atmospheric dynamical core then subsamples this coarser information to provide stress information at the same resolution used by the numerics. In the lower panel, the wind and stress vectors are essentially parallel (180\degree{} difference), indicating that the frictional drag is acting in parallel opposition to the wind. This is due to the use of the higher resolution ocean grid, which preserves the resolution of the surface wind field during stress calculations. This is further evidenced by the fact that the integrated dot product (over a 5\degree{}x5\degree{} domain centered over the TC minimum surface pressure) of the two fields is approximately 10\% smaller in the simulations using the 1\degree{} ocean grid. Therefore, the use of the coarser ocean grid results in a weaker frictional force used by the atmospheric dynamics.
 
-The only differences between the two model setups is the grid used by the data ocean and ice models. The first set of simulations uses a displace tripole grid with an equivalent resolution of 1\degree{} (gx1v6) while the second uses an ocean grid identical to the atmospheric grid with an equivalent resolution of 1/8\degree{}.
+The cumulative surface flux is shown on the right (sensible plus latent heat) for the two storms at the same forecast time. It is readily apparent that the coarser ocean grid (Fig. XXX) provides much coarser information back to the atmosphere than the 1/8\degree{} ocean grid (XXXX). While the difference in 5\degree{}x5\degree{} integrated heat flux is relatively small (approximately 1\%), it is clear that the spatial structure of the heat flux field is very different between the two model configurations. This may also play a role in storm dynamics with the 1\degree{} ocean grid providing a larger, more diffuse source of surface heating to the TC core than the high-resolution grid.
 
 {\color{red} COLIN FORECAST STUFF AT 14 KM}
 
@@ -223,6 +227,12 @@ The only differences between the two model setups is the grid used by the data o
 \section{Discussion}
 
 Discussion goes here.
+
+The issues outlined in the manuscript are rather trivially fixed for data ocean models, where specifying SSTs and applying coupled atmosphere-ocean calculations on the same grid is straightforward. The larger question arises when coupling to a dynamical ocean model. The vast majority of coupled simulations not only utilize differing resolutions between different model components, but also different numerical techniques and grids, therefore remapping between components is an absolute necessity.
+
+The obvious recommendation to alleviate coupling inconsistencies when it is not feasible to use identical grids is to calculate these quantities on the finest resolution grid of the coupled system. In the vast majority of earth system models, this is typically the atmosphere. Performing coupling in this manner ensures that information passed back to a model component has not be interpolated to a resolution coarser than its native resolution during the coupling process.
+
+However, it is not clear that mechanism is fully appropriate for dynamical ocean models, where aspects such as turbulent mixing may be sufficiently non-linear that merely averaging from a higher resolution grid may not be the most appropriate mechanism.
 
 %----------------------------------------------------------------------------------------
 %	APPENDICES (OPTIONAL)
