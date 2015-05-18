@@ -119,7 +119,7 @@
 %----------------------------------------------------------------------------------------
 
 % Author names in capital letters:
-\authorrunninghead{SMITH ET AL.}
+\authorrunninghead{ZARZYCKI ET AL.}
 
 %------------------------------------------------
 
@@ -129,7 +129,7 @@
 %------------------------------------------------
 
 % Corresponding author mailing address and e-mail address:
-\authoraddr{Corresponding author: Colin M. Zarzyck, Climate and Global Dynamics, National Center for Atmospheric Research, Boulder, Colorado, USA. (zarzycki@ucar.edu)}
+\authoraddr{Corresponding author: Colin M. Zarzycki, Climate and Global Dynamics, National Center for Atmospheric Research, Boulder, Colorado, USA. (zarzycki@ucar.edu)}
 
 %----------------------------------------------------------------------------------------
 
@@ -153,7 +153,7 @@
 Kevin A. Reed\altaffilmark{2}, 
 Julio Bacmeister\altaffilmark{1},
 Susan C. Bates\altaffilmark{1},
-Anthony Craig\altaffilmark{1},
+Anthony P. Craig\altaffilmark{1},
 and
 J. E. Truesdale,\altaffilmark{1}}
 
@@ -232,6 +232,9 @@ The cumulative surface heat flux is shown on the bottom (sensible plus latent) f
 
 \subsection{Climate simulations}
 \label{sec:climate}
+When comparing TC statistics between the two simulations there are noticeable differences.  Table~\ref{tc_counts} displays storm counts for all TCs, storms that reach hurricane strength and storms that reach major hurricane strength (i.e., categories 4 and 5) for each simulation for 1980 through 2005. Observations from the International Best Track Archive for Climate Stewardship (IBTrACS, \citet{Knapp2010}) for the same time period are provided as a reference. The TC tracker uses 3-hourly model output and is described in detail in \citet{Zhao2009}.  For the tracker, the surface winds (commonly taken to be at a height of 10 m) are approximated from the lowermost model level winds ($\approx$ 60 m) and a logarithmic law similar to the approach described in \citet{Zarzycki2014AMIPTCs}.  Both simulations produce roughly the same frequency of total storms.  However, the simulation coupled to the lower resolution ocean produces 10$\%$ more hurricanes and nearly times the amount of major hurricanes when compared to the simulation with the higher resolution coupling.
+
+To explore this further, Figure~\ref{fig:preswind} displays the minimum surface pressure vs. maximum wind speed relationship for tropical cyclones for each simulation with a quadratic least squares fit shown as a solid line. IBTrACS observations are again included as a reference and to be consistent with the TC tracker only storms that reach tropical storm strength in their lifetime are used. Note that 3-hourly output is used for the model simulations, while the IBTrACS data is 6-hourly.  At low wind speeds (i.e., < 40 m/s) the relationship between the minimum surface pressure and maximum wind speed for the two model simulations and observations compare well.  However, at larger wind speeds ne120$\_$gx1v6 simulation is producing greater winds speeds at a given minimum pressure than ne120$\_$ne120 simulation, comparing will with the results in Section~\ref{sec:forecast}
 
 {\color{red} JULIO/KEVIN CLIMATE SIMS}
 
@@ -428,18 +431,24 @@ This work was partially supported by a grant from the Spanish Ministry of Scienc
 \label{fig:forecast_panels}
 \end{figure}
 
-%\begin{table}
-%\caption{Table caption}\label{sampletable}
-%\begin{tabular}{l l l}
-%\hline
-%\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-%\hline
-%Treatment 1 & 0.0003262 & 0.562 \\
-%Treatment 2 & 0.0015681 & 0.910 \\
-%Treatment 3 & 0.0009271 & 0.296 \\
-%\hline
-%\end{tabular}
-%\end{table}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{fig_preswind.pdf}
+\caption{Storm minimum surface pressure vs. maximum wind speed relationship with quadratic least squares fit (solid lines) for the CAM5 simulations and IBTrACS observations from 1980 to 2005.  Note that 3-hourly output is used for the model simulations, while the IBTrACS data is 6-hourly.}
+\label{fig:preswind}
+\end{figure}
+
+\begin{table}
+\caption{Annual frequency of global tropical cyclones that reach tropical storm (cat. 0-5), hurricane (cat. 1-5) and major hurricane (cat. 4-5) strength the CAM5 simulations and IBTrACS observations for the time period of 1980 to 2005.}\label{tc_counts}
+\begin{tabular}{l c c c}
+\hline
+\textbf{Simulation} & \textbf{Total Storms} & \textbf{Hurricanes} & \textbf{Major Hurricanes}\\
+\hline
+IBTrACS         & 91.6 $\pm$ 8.5    & 47.1 $\pm$ 5.5 & 10.7 $\pm$ 3.3 \\
+ne120$\_$gx1v6 &  70.1 $\pm$ 9.0   & 55.5 $\pm$ 7.7  & 12.5 $\pm$ 3.4\\
+ne120$\_$ne120 & 73.2 $\pm$ 10.5  & 50.3 $\pm$ 8.2 & 4.2   $\pm$ 1.9 \\
+\hline
+\end{tabular}
+\end{table}
 
 \end{document}
 
