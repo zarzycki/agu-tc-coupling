@@ -71,6 +71,7 @@
 % cmz - Additional added packages
 \usepackage{rotating}
 \usepackage{color}
+\usepackage{epstopdf}
 
 % To create numbered lines:
 
@@ -423,22 +424,27 @@ This work was partially supported by a grant from the Spanish Ministry of Scienc
 \newpage
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{taylor_globe_ANN.pdf}
+\includegraphics[width=0.7\linewidth]{fig_taylor_globe_ANN.pdf}
 \caption{Figure caption}
 \label{fig:taylor_global}
 \end{figure}
 
-
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{fig_compareStress.pdf}
-\caption{Figure caption}
-\label{fig:forecast_panels}
+\includegraphics[width=0.8\linewidth]{fig_Maxwind-exceedance.eps}
+\caption{Caption.}
+\label{fig:wind-pdfs}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{fig_preswind.pdf}
 \caption{Storm minimum surface pressure vs. maximum wind speed relationship with quadratic least squares fit (solid lines) for the CAM5 simulations and IBTrACS observations from 1980 to 2005.  Note that 3-hourly output is used for the model simulations, while the IBTrACS data is 6-hourly.}
 \label{fig:preswind}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{fig_compareStress.pdf}
+\caption{Figure caption}
+\label{fig:forecast_panels}
 \end{figure}
 
 \begin{table}
