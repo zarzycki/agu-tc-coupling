@@ -212,7 +212,7 @@ Because earth system model components generally are not integrated on the same s
 
 {\color{red} (Describe coupling procedure in CESM; draw schematic; confirm with T. Craig or Mariana).}
 
-During coupling between the atmosphere and ocean, state variables from the atmospheric grid are conservatively remapped to the ocean grid. Surface momentum stress ($\tau$) and sensible and latent heat fluxes are calculated on the ocean grid. The quantities are then passed back to the atmospheric grid, allowing these quantities to be available to both the atmospheric dynamical core and subgrid physical parameterizations.
+Figure \ref{fig:coupling-schematic} provides a schematic of the coupling process when differences exist between the resolution of the atmosphere and ocean grids. In this case, the atmospheric grid is of finer resolution, which is a frequently used configuration of coupled climate models. State variables, such as winds, are computed on the atmospheric grid (Fig. \ref{fig:coupling-schematic}a). These values are then conservatively remapped to the ocean grid (Fig. \ref{fig:coupling-schematic}b). Surface momentum stress ($\tau$) and sensible and latent heat fluxes are calculated on the ocean grid using these remapped values (Fig. \ref{fig:coupling-schematic}c). The calculated quantities are then conservatively remapped back to the atmospheric grid (Fig. \ref{fig:coupling-schematic}d), where they are used by the atmospheric component of the model for integration (Fig. \ref{fig:coupling-schematic}e).
 
 Generally, if the atmosphere and ocean are not on the same grid, the atmospheric grid consists of finer grid spacing. 
 
