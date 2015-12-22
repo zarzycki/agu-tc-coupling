@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{natbib}
+\usepackage{float} % Needed to force figure dump in specific location. Use [H] option.
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+
+\newcommand{\genDisc}[1]{\medskip \hrule \noindent \\
+               {\itshape #1}} 
+               
+\newcommand{\pointRaised}[2]{\medskip \hrule \noindent \\
+               {\itshape {\bfseries #1}: #2}}
+               
+\newcommand{\pointRaisedNoRef}[1]{\medskip \hrule \noindent \\
+               {\itshape #1}} 
+
+\newcommand{\reply}{\noindent \\ \textbf{Reply}:\ }
+
+\newcommand{\degree}{$^{\circ}$}
+\newcommand{\texttilde}{$\sim$}
+
+
+\begin{document}
+
+\title{Response to Reviewers of GMDD-8-7983-2015, `Impact of ocean coupling strategy on extremes in high-resolution atmospheric simulations'}
+\author{C. M. Zarzycki, K. A. Reed, J. Bacmeister, A. P. Craig, S. C. Bates, and N. A. Rosenbloom}
+
+\maketitle
+
+\subsection*{Response to Reviewer \#1}
+
+\genDisc{The aim of this paper is to emphasize the role of the model configuration in the computation of the atmosphere/ocean fluxes as well as their feedback on TCs. When the ocean grid is coarser than the atmospheric one, wind stresses computed on the coarser grid tend to be underestimated and cannot modulate the atmospheric winds, leading to overestimated TC strength. The authors demonstrate that fluxes should be calculated on the finest grid to allow better equilibrium between the two models.
+
+The paper is clear and well written and the problematic is easy to understand for the reader. The experimental protocol has been well constructed to answer the question. Some deterministic simulations have been performed to illustrate the effect of the resolution on forecast of the real case of Leslie.
+
+For the reasons explained in the next section, I do not think that the paper is ready for publication. Nevertheless, since the changes that I would suggest to do are not so large (addressing other characteristics of TCs in the first part and comparing deterministic simulations with observations of Leslie, deeper discussion on surface heat fluxes), I suggest that the paper may be accepted after minor revision.}
+
+\reply{Thank you for your prompt review and insightful comments.}
+
+\genDisc{It would have been interesting to assess some other characteristics of TC activity, such as life duration, track density (are the tracks impacted by the way stress are calculated) as well as associated phenomena such as rainfall but it would result in a longer paper.}
+
+\reply{We have added average storm duration to Table 1 since it was a trivial calculation given the postprocessed tracking output. Storm lifetime only differs by approximately 2\% between the simulations. This further underscores that the overall distribution of storms produced is similar; it is the tail of the intensity distribution (most extremes TCs) that is shifted due to the coupling feedback described in the manuscript. A cursory look at track density for all tracked TCs (not shown) show no fundamental shifts (spatially) that are considered to be significant. We agree that precipitation would be an interesting variable to assess, but also agree that it is beyond the scope of this manuscript as currently written. Since precipitation is driven by dynamical processes within the core of the TC, we anticipate the differences in precipitation between configurations would be somewhat similar to that seen in intensity, with most intense precipitation rates associated with TCs being higher in the configuration which produced stronger TCs (ne120\_gx1v6).}
+
+\genDisc{Deterministic simulations of hurricane Leslie are done to illustrate what have been showed in the climate simulations. If the effect of the grid resolution on wind stresses is clear in figure 5, the realism of the simulated hurricane has not been assessed, which should be, in my sense, the objective of such simulations. For example, it is not clear in figure 5 if resulting winds are different between the different simulations and which one is the nearest to real winds observed during Leslie. I do not really understand the usefulness of such simulations if comparison with observations is not undertaken. Climate simulations may be sufficient to demonstrate the impact of the resolution on wind stresses by a statistical approach.}
+
+\reply{We have added `The simulated intensity of Hurricane Leslie at 120 hours (as measured by minimum sea level pressure) was 950 and 958 hPa for the ne240\_gx1v6 and ne240\_ne240 configurations, respectively. Both configurations predicted a TC stronger than the observed intensity at that forecast time (988 hPa), in broad agreement with previous work that has shown CAM5-SE produces TCs which are (on average) too intense in forecast frameworks at 0.125\degree{} resolution \citep{Zarzycki2015TCForecast}. However, it should be emphasized that we are not concerned with forecast verification, but rather, the relative differences that arise due to coupling strategy despite identically-initialized cases. Highly similar results to those highlighted here would be expected when using different historical TCs or even more idealized frameworks.' which addresses this point.
+
+Essentially, the choice of simulation is not critical to the results of this study. The same results were seen with a different TC during the 2012 season (Hurricane Michael, not shown). The only criteria is that the simulations are initialized with identical initial conditions, use identical forcing, and are on identical grids except for the one used to calculate the air-sea fluxes and wind stresses.}
+
+\genDisc{Figure 5 d, e and f show some results on surface heat flux (SHF); I wonder whether these results and related comments are useful in the paper. Indeed, since the reader understands well in which wind stress feedback impact strength of TCs, he may not be aware on the effect of SHF differences on TC characteristics. I suggest to suppress this part or explicitly show in what way differences in SHF influence the TCs.}
+
+\reply{To further show how heat flux patterns can influence TCs, we have added the following text: `The pattern of surface heat and moisture fluxes underneath TCs has been shown to be critically important in intensification processes \citep{Peng1999,Chan2001,Wang2004}. Therefore, the choice of coupling grid may play an indirect role in storm energetics, with the 1\degree{} ocean grid providing a larger, more diffuse source of surface heating to the boundary layer within the TC core.'
+
+While we understand that the impact of enthalpy (sensible and latent heat) fluxes on TC structure and intensity are highly complex, we feel that prior research (e.g., \citet{Peng1999,Chan2001,Wang2004}) has indicated that the spatial patterns and subsequent phasing of these quantities with other dynamical aspects of the storm (e.g., moisture convergence) are critically important to TC representation. While the wind stress appears to play a much larger role in the mean climatology, it is worth noting that the aspects of coupling discussed in this manuscript may also play roles in other TC processes.}
+
+\pointRaised{Title}{You should mention explicitly `tropical cyclones' instead of `extremes' since it is the only phenomena assessed in the study.}
+
+\reply{We have changed the title to `Impact of surface coupling grids on tropical cyclone extremes in high-resolution atmospheric simulations' (see also Reviewer \#2's comments regarding the title).}
+
+\pointRaised{Page 7987, Line 26}{The expression ?prescribed ocean/ice model? seems to me as misleading. It would be better to mention the ocean grid instead. Indeed, what I understand is that observed SST and ice are prescribed via the coupler CLM as in a fully coupled model but no ocean/ice model is run. I suggest to reformulate the sentence.}
+
+\reply{Agreed. To address this, we have changed the referred section to read `The first simulation uses prescribed ocean and sea ice conditions applied on a grid where the polar point is displaced over Greenland, which is at approximately 1\degree{} horizontal resolution (ne120\_gx1v6). This is coarser than both the atmosphere and land models. The second simulation is identical to the first, except the ocean/ice conditions are applied on the same 0.25\degree{} (ne120) grid as the atmosphere and land (ne120\_ne120).'}
+
+\subsection*{Response to Reviewer \#2}
+
+\genDisc{This paper is a short study that points out some spurious effects when the surface fluxes in an atmospheric GCM are computed on a coarser grid. In particular, this leads to wind stress vectors that are not always aligned with the surface wind, leading to a mis-representation of extreme events. The problem is demonstrated here with an atmosphere-only GCM, but it should remain present in coupled mode. This problem may not occur very frequently in practice : not all atmospheric models compute surface fluxes on the ocean grid, and it is probably relatively rare to have a coarser ocean resolution, especially now that surface datasets at 0.25? exist. Still, it is something to be aware of when designing the interface of a GCM (along with the converse issues for the ocean with a coarse atmospheric grid). The problem pointed out may not be immediately apparent as the mean state is not impacted, and the paper shows it in a clear and pedagogic way. It should therefore be a valuable addition to the literature on model development.}
+
+\reply{Thank you for your positive feedback.}
+
+\genDisc{Title could be more specific (fluxes on coarse surface grid... rather than "coupling strategy" when imposed SSTs are used here).}
+
+\reply{We have chosen to change the title to `Impact of surface coupling grids on tropical cyclone extremes in high-resolution atmospheric simulations' in response to both this comment and one from Reviewer \#1.}
+
+\genDisc{Maybe a comment could be made in the intro or model section on why the fluxes are computed on the surface model grid in the first place ? (History of higher-resolution surface grid presumably). This would fit with the conclusion that fluxes should always be computed on the finest grid.}
+
+\reply{We agree. The first paragraph within the coupling section now reads `Historically, this has not been the case, with the surface model (land, ocean, ice) grids being finer than their atmospheric counterparts. As smaller atmospheric grid spacings become more common in simulations utilizing prescribed SSTs and ice data forcing, it's no longer typical for the ocean resolution to be similar or finer in resolution in such setups. Therefore, having the atmospheric grid be the finest in the climate system is the default setup for many high-resolution configurations in CESM.'}
+
+\pointRaised{Conclusion, first line}{"atmospheric extreme climatology" is a bit awkward: distribution of extremes in atmospheric circulation ? Or just "strength of tropical cyclones"?}
+
+\reply{To address this, we have changed the passage to read `This manuscript describes biases in the distribution of atmospheric extremes which arise from choice of ocean grid and coupling strategy in CESM.'}
+
+\pointRaised{Figure 5}{Legend does not explain panels (c,f) type of simulation. Note that there are few differences between the (e,f) panels only because the SST used has no smallscale structure; there would presumably be more impacts in the presence of oceanic front or eddies.}
+
+\reply{We have amended the caption to read `... Right panels (c,f) show version of 1\degree{} grid where calculations are carried out on the atmospheric grid. ...'
+We have also added `It should be noted that, as discussed earlier, the resolution of the SST forcing data set is 1\degree{}, which provides identical spatial forcing across all configurations. If SST was provided at native resolution of each ocean grid, larger differences would be expected between the ne240\_ne240 and ne240\_gx1v6\_reverse configurations due to additional small-scale forcing (such as ocean fronts and eddies) in the ne240\_ne240 experiment.' to emphasize the second point.}
+
+\bibliographystyle{abbrvnat}
+\bibliography{../../bibtex/references} 
+
+\end{document}
